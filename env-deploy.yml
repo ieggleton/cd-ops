@@ -1,0 +1,39 @@
+version: 2.1
+description: |
+  An orb that obfuscates the nuances of deploy and test from a user of the piece to help build
+  better readability and maintenance in one place (doesn't deploy yet)
+commands:
+  run-tests:
+    description: Deploy an service with the given image - test if requested (doesn't deploy yet)
+    parameters:
+      project-slug:
+        type: string
+        description:
+      image-tag:
+        type: string
+        description: Fully qualified tag of the docker image to deploy
+      test-tags:
+        type: string
+        description: A tag string for cucumber test runs
+      test-branch:
+        type: string
+        description: The branch on which to apply changes
+    steps:
+      - run:
+          name: Add log entry for testing
+          command: |
+            curl --request POST \
+              --url https://circleci.com/api/v2/<< parameters.project-slug >>/pipeline \
+              --header "Circle-Token: ${CIRCLECI_API_TOKEN}" \
+              --header 'content-type: application/json' \
+              --data "{
+                  \"branch\": \"<< parameters.test-branch >>",
+                  \"parameters\": {
+                      \"test-tags\": \"<< paramters.test-tags >>\",
+                      \"image-tag\": \"<< parameters.image-tag >>\",
+                      \"project\": \"${CIRCLE_PROJECT_REPONAME}\",
+                      \"build-num\": \"${$CIRCLE_BUILD_NUM}\",
+                      \"add-test-run\": true
+                  }
+              }"
+
