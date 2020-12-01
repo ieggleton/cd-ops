@@ -1,8 +1,13 @@
-# Env Deploy
+# CD Ops
 
-This is unlikely to be useful outside of the organisation for which it was designed
+This is unlikely to be useful outside of the organisation for which it was designed, but can be used
+as a cue for how you may run downstream pipelines and workflows which exist outside of the
+currently running workflow.
 
-## Deploy and (Optionally) Test Microservices to k8s using kustomize
+Obfuscates calls to be descriptive when used within a config file to better provide context behind
+operations but also form a single point of truth for said operations.
+
+## Operations related to CD
 
 * [`TBD`](https://www.idonotexistyet.com) 
 
@@ -27,7 +32,7 @@ variable `$CIRCLECI_API_TOKEN`
 ```yml
 version: 2.1
       orbs:
-        packagecloud: ieggleton/env-deploy@x.y.z
+        packagecloud: ieggleton/cd-ops@x.y.z
       jobs:
         build:
           docker:
@@ -45,7 +50,7 @@ version: 2.1
                 command: |
                   my deploy commands
 
-            - env-deploy/run-tests
+            - cd-ops/trigger-tests
                 project-slug: vcs/org-name/my-test-repo
                 image-tag: my-deployable:0.0.0
                 test-tags: "not @ignore"

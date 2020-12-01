@@ -3,7 +3,7 @@ description: |
   An orb that obfuscates the nuances of deploy and test from a user of the piece to help build
   better readability and maintenance in one place (doesn't deploy yet)
 commands:
-  run-tests:
+  trigger-tests:
     description: Deploy an service with the given image - test if requested (doesn't deploy yet)
     parameters:
       project-slug:
