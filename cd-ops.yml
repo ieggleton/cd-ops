@@ -29,7 +29,7 @@ commands:
               --data "{
                   \"branch\": \"<< parameters.test-branch >>",
                   \"parameters\": {
-                      \"test-tags\": \"<< paramters.test-tags >>\",
+                      \"test-tags\": \"<< parameters.test-tags >>\",
                       \"image-tag\": \"<< parameters.image-tag >>\",
                       \"project\": \"${CIRCLE_PROJECT_REPONAME}\",
                       \"build-num\": \"${$CIRCLE_BUILD_NUM}\",
